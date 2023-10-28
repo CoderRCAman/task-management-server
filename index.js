@@ -11,18 +11,14 @@ const morgan = require("morgan");
 const app = express();
 app.use(express.static("avatars")); //✔
 app.use(express.static("file-store")); //✔
+app.use(cors());
 app.use(function (req, res, next) {
   res.header("Content-Type", "application/json;charset=UTF-8");
   res.header("Access-Control-Allow-Credentials", true);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   next();
 });
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
 app.use(morgan("tiny"));
 
 app.use("/user", userRouter);
